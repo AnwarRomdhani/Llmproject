@@ -1,9 +1,15 @@
+import openai
+
 from dotenv import load_dotenv
-load_dotenv()
+
+import Env
+Env.envset()
+
 import aisuite as ai
 client = ai.Client()
 
-models = ["openai:gpt-4o"]
+#models = ["openai:gpt-4o"]
+models = [ "huggingface:HuggingFaceTB/SmolLM2-1.7B-Instruct", "groq:gemma-7b-it"]
 
 messages = [
     {"role": "system", "content": "Respond in Pirate English."},
@@ -15,5 +21,5 @@ for model in models:
         model=model,
         messages=messages,
         temperature=0.75
-    )
+        )
     print(response.choices[0].message.content)
